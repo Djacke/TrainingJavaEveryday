@@ -1,13 +1,17 @@
 package com.tt.test;
 
-import java.util.Date;
-
 public class TestDate {
-
-	public static void main(String[] args) {
-		Date date = new Date();
-		System.out.println(date);
-
-	}
+	
+//	static{
+//		System.load("D:\\HighFunction\\GrowthIceThicknessJavaDll\\GrowthIceThickness.dll");
+//	}
+//
+//	public static void main(String[] args) {
+//		Date date = new Date();
+//		System.out.println(date);
+//
+//		GrowthIceThickness ness = new GrowthIceThickness();
+//		
+//	}
 
 }
