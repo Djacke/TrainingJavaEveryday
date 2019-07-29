@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.3.RELEASE'
+        springBootVersion = '2.0.3.RELEASE'
     }
     repositories {
         // NOTE: You should declare only repositories that you need here
@@ -25,23 +25,22 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-       // classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-       // classpath 'org.springframework:springloaded:1.2.6.RELEASE'
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
-plugins {
-    id 'com.gradle.build-scan' version '1.6'
-    id "com.gorylenko.gradle-git-properties" version "1.4.17"
-}
-
-buildScan {
+/*buildScan {
     licenseAgreementUrl = 'https://gradle.com/terms-of-service'
     licenseAgree = 'yes'
-}
+}*/
 
 apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
+apply plugin: 'eclipse'
+apply plugin:"idea"
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
 
 repositories {
     // NOTE: You should declare only repositories that you need here
@@ -66,10 +65,16 @@ repositories {
     mavenCentral()
 }
 
-jar {
-    baseName = 'entity-service'
-    version = '1.0.0'
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+    }
+}
 
+jar {
+    baseName = 'training-pro'
+    version = '1.0.0'
     manifest {
         attributes 'Implementation-Title': baseName,
                 'Implementation-Version': version,
@@ -80,12 +85,8 @@ jar {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.4.1'
+    gradleVersion = '4.5'
 }
-
-// Uses JDK 8
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 sourceSets {
     integTest {
@@ -105,13 +106,19 @@ task integration(type: Test) {
 }
 
 dependencies {
-    compile 'org.projectlombok:lombok:1.16.16'       
+    compile (
+            'org.projectlombok:lombok:1.16.16',
+            "com.google.code.gson:gson:2.8.1",
+            "com.google.guava:guava:22.0"
+    )
     compileOnly 'org.projectlombok:lombok:1.16.16'
 
-    testCompile "com.google.code.gson:gson:2.8.1",
-    			"junit:junit:4.12"
+    testCompile "junit:junit:4.12"
 
-
+    integTestCompile sourceSets.main.output
+    integTestCompile configurations.testCompile
+    integTestCompile sourceSets.test.output
+    integTestRuntime configurations.testRuntime
 }
 
 check.dependsOn integTest

@@ -78,7 +78,6 @@ public class StringReflection {
 	}
 
 	/**
-	 * 对输入的字符串数组改变其中的字符串的值
 	 * @return void
 	 * @author chenjq5
 	 * @param String[]
@@ -89,13 +88,10 @@ public class StringReflection {
 		System.out.println("s=" + s);//Hello World
 		Field valueFieldOfString = String.class.getDeclaredField("value");
 		
-		//改变value属性的访问权限
 		valueFieldOfString.setAccessible(true);
 		
-		//获取s对象上的value值
 		char[] value = (char[]) valueFieldOfString.get(s);
 		
-		//改变value所引用的数组中的字符
 		value[5] = '_';
 		System.out.println("s=" + s);
 		

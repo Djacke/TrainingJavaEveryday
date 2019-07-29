@@ -11,7 +11,7 @@ public class TestString {
 	}
 	
 	/**
-	 * 如果字符串中的字符有相同的返回false，否则返回true
+	 *
 	 * @param iniString
 	 * @return
 	 */
@@ -30,7 +30,6 @@ public class TestString {
       }
     
     /**
-     * 字符串压缩
      * @param iniString
      * @return
      */

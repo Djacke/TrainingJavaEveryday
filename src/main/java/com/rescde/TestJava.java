@@ -1,4 +1,4 @@
-package com.rescde;
+package com.training.thread;
 
 import java.util.Scanner;
 
@@ -23,28 +23,26 @@ abstract public class TestJava {
 		boolean bool = true;
 		 
 		while (bool) {
-		    System.out.println("请输入整数：");
+		    System.out.println("bool is true");
 		    try {
 		        a = sc.next();
 		        b = Integer.valueOf((String) a);
 		        bool = false;
 		    } catch (Exception e) {
-		        System.out.println("抛出异常，异常信息为" + e.getMessage());
+		        System.out.println("has error:" + e.getMessage());
 		    }
 		}
 		 
 		System.out.println("b = " + b);
 	}
 	public abstract String doSomething();
-	//静态块，只加载一次
 	static
 	{
-		System.out.println("静态块：资源加载....");
+		System.out.println("test static block....");
 	}
 	
-	//实例块，每次创建实例都会加载
 	{
-		System.out.println("实例块：每次实例化类加载....");
+		System.out.println("test method block....");
 	}
 	
 	TestJava()
